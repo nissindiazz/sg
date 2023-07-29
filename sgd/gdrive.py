@@ -61,6 +61,10 @@ class GoogleDrive:
                     )
                 else:
                     out.append(self.qgen(f"{title} {sm.year}"))
+        else:
+            # Lógica para buscar arquivos STRM
+            strm_q = self.qgen(sm.title, chain="or", method="fullText", splitter=", ")
+            out.append(f"{strm_q} and mimeType='application/vnd.apple.mpegurl'")
         return out
 
     def file_list(self, file_fields):
